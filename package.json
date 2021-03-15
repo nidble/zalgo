@@ -1,0 +1,11 @@
+{
+  "name": "zalgo",
+  "version": "1.0.0",
+  "description": "A full fladged service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Antonino Bertulla <abertulla@gmail.com>",
+  "license": "MIT"
+}
