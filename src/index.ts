@@ -1,7 +1,6 @@
 import polka from 'polka'
 import send from '@polka/send-type'
-import { create } from 'captcha'
-
+import { create } from 'zalgo-captcha'
 
 const app: polka.Polka = polka()
 app.get('/v1/dummy/:id', (req, res) => {

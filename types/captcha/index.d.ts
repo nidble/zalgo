@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/triple-slash-reference */
 /* eslint-disable spaced-comment */
 
-declare module 'captcha' {
+declare module 'zalgo-captcha' {
   export const create: () => [string, string]
 }
 

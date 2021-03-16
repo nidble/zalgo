@@ -1,7 +1,7 @@
 {
   "name": "zalgo",
   "version": "1.0.0",
-  "description": "A full fladged service",
+  "description": "Another RESTful service",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@polka/send-type": "^0.5.2",
-    "captcha": "file:./native/zalgo-captcha",
+    "zalgo-captcha": "file:./pkg/zalgo-captcha",
     "polka": "^0.5.2"
   }
 }
