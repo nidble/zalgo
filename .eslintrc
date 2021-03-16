@@ -95,10 +95,6 @@
       "error",
       "single"
     ],
-    "jsx-quotes": [
-      "error",
-      "prefer-double"
-    ],
     "no-underscore-dangle": "warn",
     "prefer-arrow-callback": "error",
     "eol-last": [

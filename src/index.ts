@@ -1,5 +1,7 @@
+import { create } from 'captcha'
+
 const main = () => {
-  console.log('Hello World!')
+  console.log(create())
 }
 
 main()
