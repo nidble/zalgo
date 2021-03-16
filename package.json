@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && node ./dist/index.js",
+    "start": "tsc && node ./dist/server.js",
     "lint": "eslint \"*/**/*.ts\" --quiet --fix",
     "format": "prettier --config .prettierrc \"./src/**/*.ts\" --write",
     "test": "jest",
@@ -17,6 +17,8 @@
   "devDependencies": {
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.35",
+    "@types/polka": "^0.5.2",
+    "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "eslint": "^7.22.0",
@@ -32,6 +34,8 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "captcha": "file:./native/zalgo-captcha"
+    "@polka/send-type": "^0.5.2",
+    "captcha": "file:./native/zalgo-captcha",
+    "polka": "^0.5.2"
   }
 }
