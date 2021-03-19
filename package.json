@@ -35,7 +35,10 @@
   },
   "dependencies": {
     "@polka/send-type": "^0.5.2",
-    "zalgo-captcha": "file:./pkg/zalgo-captcha",
-    "polka": "^0.5.2"
+    "body-parser": "^1.19.0",
+    "nanoid": "^3.1.22",
+    "node-cache": "^5.1.2",
+    "polka": "^0.5.2",
+    "zalgo-captcha": "file:./pkg/zalgo-captcha"
   }
 }

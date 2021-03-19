@@ -1,11 +1,14 @@
 import polka from 'polka'
-import send from '@polka/send-type'
-import { create } from 'zalgo-captcha'
+import { json } from 'body-parser'
+import { post, put } from './api/v1/captcha'
 
 const app: polka.Polka = polka()
-app.get('/v1/dummy/:id', (req, res) => {
-  const [base64, text] = create()
-  send(res, 200, { id: req.params.id, text, base64 })
-})
+app.use(json())
+
+app.get('healthcheck', (_req, res) => res.end())
+
+app.put('/v1/captcha', put)
+
+app.post('/v1/captcha/:id', post)
 
 export default app
