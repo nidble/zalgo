@@ -1,9 +1,10 @@
 import polka from 'polka'
-import { json } from 'body-parser'
+import { json, cors } from './middleware'
 import { post, put } from './api/v1/captcha'
 
 const app: polka.Polka = polka()
-app.use(json())
+
+app.use(json, cors)
 
 app.get('healthcheck', (_req, res) => res.end())
 
