@@ -9,7 +9,7 @@
     "lint": "eslint \"*/**/*.ts\" --quiet --fix",
     "format": "prettier --config .prettierrc \"./src/**/*.ts\" --write",
     "test": "jest",
-    "test:watch": "npm run test --watch",
+    "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
   "author": "Antonino Bertulla <abertulla@gmail.com>",
