@@ -1,6 +1,7 @@
 import app from '../src'
 import request from 'supertest'
 import { DEFAULT_TTL, DEFAULT_ATTEMPTS } from '../src/config'
+import Captcha from '../src/model'
 
 const attempts = [...new Array(DEFAULT_ATTEMPTS)]
 
@@ -16,7 +17,7 @@ describe('Captcha Api', () => {
 
     expect(result.body.attempts).toBe(DEFAULT_ATTEMPTS)
     expect(result.body).toHaveProperty('id')
-    expect(result.body).toHaveProperty('text')
+    expect(result.body).not.toHaveProperty('solution')
     expect(result.body).toHaveProperty('base64')
 
     expect(result.headers).toHaveProperty('expire')
@@ -30,8 +31,11 @@ describe('Captcha Api', () => {
   })
 
   it('handle resource positive validation', async () => {
-    const { body: captcha } = await request(app.handler).put('/v1/captcha').send()
-    const result = await request(app.handler).post(`/v1/captcha/${captcha.id}`).send({ solution: captcha.text })
+    const { body: response } = await request(app.handler).put('/v1/captcha').send()
+    const captcha = Captcha.get(response.id)
+    const result = await request(app.handler)
+      .post(`/v1/captcha/${response.id}`)
+      .send({ solution: captcha?.instance.solution })
 
     expect(result.status).toBe(200)
   })

@@ -3,21 +3,23 @@ import NodeCache from 'node-cache'
 import zalgoCaptcha from 'zalgo-captcha'
 import { CACHE_PREFIX, DEFAULT_ATTEMPTS, DEFAULT_TTL } from '../config'
 
-type Captcha = { id: string; attempts: number; text: string }
+type Captcha = { id: string; attempts: number; solution: string; base64: string }
 type Augmented = ReturnType<typeof augment>
 
 const cache = new NodeCache({ stdTTL: DEFAULT_TTL })
 
-const augment = (c: Captcha) => ({
-  isStale: () => 0 === c.attempts,
-  evinct: () => cache.set(`${CACHE_PREFIX}${c.id}`, { ...c, attempts: --c.attempts }),
-  check: (solution: string) => c.text === solution,
+const augment = (instance: Captcha) => ({
+  isStale: () => 0 === instance.attempts,
+  decrAttemps: () => cache.set(`${CACHE_PREFIX}${instance.id}`, { ...instance, attempts: --instance.attempts }),
+  check: (solution: string) => instance.solution === solution,
+  instance,
 })
 
-const create = (): Captcha => {
-  const [base64, text] = zalgoCaptcha.create()
-  const captcha = { text, base64, id: nanoid(), attempts: DEFAULT_ATTEMPTS }
-  cache.set(`${CACHE_PREFIX}${captcha.id}`, captcha)
+const create = (): Omit<Captcha, 'solution'> => {
+  const id = nanoid()
+  const [base64, solution] = zalgoCaptcha.create()
+  const captcha = { base64, id, attempts: DEFAULT_ATTEMPTS }
+  cache.set(`${CACHE_PREFIX}${captcha.id}`, { ...captcha, solution })
 
   return captcha
 }

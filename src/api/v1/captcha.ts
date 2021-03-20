@@ -38,7 +38,7 @@ export const post: RequestHandler = (req, res) => {
   }
 
   if (!captcha.check(req.body.solution)) {
-    captcha.evinct()
+    captcha.decrAttemps()
     return response(res, { errors: [{ message: 'The solution is not valid', field: 'solution' }] }, 422)
   }
   return response(res, { id, message: 'Captcha solved' })
