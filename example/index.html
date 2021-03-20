@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Example</title>
+  <meta name="description" content="Example">
+  <meta name="author" content="Antonino Bertulla">
+</head>
+
+<body>
+  <div id="captcha"></div>
+  <form id="solution" onsubmit="return false"><input type="text"><button>SUBMIT</button></form>
+  <script>
+    const url = 'http://localhost:3000/v1/captcha'
+    const ajax = (url, method, data = {}) => fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(resp => resp.json())
+
+    window.addEventListener("load", function(event) {
+      ajax(url, 'PUT').then(put => {
+        const divEl = document.getElementById('captcha')
+        divEl.innerHTML = `<img src="data:image/png;base64, ${put.base64}" alt="Captcha" />`
+        const callback = (ev) => 
+          ajax(`${url}/${put.id}`, 'POST', { solution: ev.target[0].value }).then(post => { 
+            alert(JSON.stringify(post))
+            return false
+        })
+        document.getElementById('solution').addEventListener("submit", callback, false); 
+      })
+    })
+  </script>
+</body>
+</html>
