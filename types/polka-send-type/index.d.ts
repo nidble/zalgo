@@ -5,7 +5,7 @@ declare module '@polka/send-type' {
   /// <reference types="node"/>
   import { ServerResponse } from 'http'
   import { ResponsePayload } from '..'
-  export default function <T>(
+  export default function (
     res: ServerResponse,
     status: number,
     payload: ResponsePayload,

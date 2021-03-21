@@ -19,7 +19,7 @@
     }).then(resp => resp.json())
 
     window.addEventListener("load", function(event) {
-      ajax(url, 'PUT').then(put => {
+      ajax(url, 'PUT').then(({ data: put }) => {
         const divEl = document.getElementById('captcha')
         divEl.innerHTML = `<img src="data:image/png;base64, ${put.base64}" alt="Captcha" />`
         const callback = (ev) => 

@@ -17,7 +17,7 @@ export const put: RequestHandler = (_req, res) => {
   const expire = new Date()
   expire.setSeconds(expire.getSeconds() + DEFAULT_TTL)
 
-  response(res, { type: 'Success', ...captcha }, 201, { expire: expire.toUTCString() })
+  response(res, { type: 'Success', data: captcha }, 201, { expire: expire.toUTCString() })
 }
 
 export const post: RequestHandler = (req, res) => {
@@ -41,5 +41,5 @@ export const post: RequestHandler = (req, res) => {
     return response(res, { type: 'Error', errors: [{ message: 'The solution is not valid', field: 'solution' }] }, 422)
   }
 
-  return response(res, { type: 'Success', id, message: 'Captcha solved' })
+  return response(res, { type: 'Success', data: { id, message: 'Captcha solved' } })
 }

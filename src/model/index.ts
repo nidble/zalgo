@@ -4,11 +4,11 @@ import zalgoCaptcha from 'zalgo-captcha'
 import { CACHE_PREFIX, DEFAULT_ATTEMPTS, DEFAULT_TTL } from '../config'
 
 type Captcha = { id: string; attempts: number; solution: string; base64: string }
-type Augmented = ReturnType<typeof augment>
+type AugmentedCaptcha = ReturnType<typeof decorate>
 
 const cache = new NodeCache({ stdTTL: DEFAULT_TTL })
 
-const augment = (instance: Captcha) => ({
+const decorate = (instance: Captcha) => ({
   isStale: () => 0 === instance.attempts,
   decrAttemps: () => cache.set(`${CACHE_PREFIX}${instance.id}`, { ...instance, attempts: --instance.attempts }),
   check: (solution: string) => instance.solution === solution,
@@ -24,9 +24,9 @@ const create = (): Omit<Captcha, 'solution'> => {
   return captcha
 }
 
-const get = (id: string): Augmented | undefined => {
+const get = (id: string): AugmentedCaptcha | undefined => {
   const captcha = cache.get<Captcha>(`${CACHE_PREFIX}${id}`)
-  return captcha ? augment(captcha) : undefined
+  return captcha ? decorate(captcha) : undefined
 }
 
 export default { create, get }

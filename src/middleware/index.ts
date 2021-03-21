@@ -12,7 +12,7 @@ export const cors: polka.Middleware = (req, res, next) => {
   res.setHeader('Access-Control-Request-Method', '*')
   res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT')
   res.setHeader('Access-Control-Allow-Headers', '*')
-  /* istanbul ignore if */ if (req.method === 'OPTIONS') {
+  if (req.method === 'OPTIONS') {
     res.writeHead(200)
     res.end()
     return

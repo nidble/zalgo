@@ -36,9 +36,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CaptchaItem'
+                $ref: '#/components/schemas/PutResponse'
   /captcha/{id}:
     post:
       tags:
@@ -65,26 +63,93 @@ paths:
       responses:
         "200":
           description: Solution valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostResponse'
         "422":
           description: solution not valid/too many attempts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         "404":
           description: no existing captcha was found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    CaptchaItem:
+    PutResponse:
       required:
-      - attemps
-      - base64
-      - id
+      - type
+      - data
       type: object
       properties:
-        id:
+        type:
           type: string
-          format: nanoid
-          example: d290f1ee6c544b0190e6d
-        attemps:
-          type: number
-          example: 5
-        base64:
+          example: Success
+        data:
+          required:
+          - id
+          type: object
+          properties:
+            id:
+              type: string
+              format: nanoid
+              example: d290f1ee6c544b0190e6d
+            attemps:
+              type: number
+              example: 5
+            base64:
+              type: string
+              format: binary
+    PostResponse:
+      required:
+      - type
+      - data
+      type: object
+      properties:
+        type:
           type: string
-          format: binary
+          example: Success
+        data:
+          required:
+          - id
+          type: object
+          properties:
+            id:
+              type: string
+              format: nanoid
+              example: d290f1ee6c544b0190e6d
+            message:
+              type: string
+              format: binary
+    ErrorResponse:
+      required:
+      - type
+      - errors
+      type: object
+      properties:
+        type:
+          type: string
+          format: string
+          example: Error
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    ErrorItem:
+      type: array
+      items:
+        type: object
+        required:
+        - message
+        properties:
+          message:
+            type: string
+            example: Solution not valid/Too many attemps
+          field:
+            type: string
+            example: solution
