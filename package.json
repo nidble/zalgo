@@ -2,7 +2,7 @@
   "name": "zalgo",
   "version": "1.0.0",
   "description": "Another RESTful service",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
     "start": "tsc && node ./dist/server.js",
