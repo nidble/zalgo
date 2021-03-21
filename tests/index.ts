@@ -6,7 +6,7 @@ import Captcha from '../src/model'
 const attempts = [...new Array(DEFAULT_ATTEMPTS)]
 
 describe('Heathcheck Api', () => {
-  it('response with 200', async () => {
+  it('handle response with 200', async () => {
     const result = await request(app.handler).get('/healthcheck').send()
     expect(result.status).toBe(200)
   })

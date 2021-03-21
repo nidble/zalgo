@@ -149,7 +149,7 @@ components:
         properties:
           message:
             type: string
-            example: Solution not valid/Too many attemps
+            example: "'field' not valid/Too many attemps"
           field:
             type: string
-            example: solution
+            example: "'field'"
