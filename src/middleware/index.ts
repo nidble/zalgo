@@ -1,5 +1,9 @@
 import polka from 'polka'
 import { json as bodyParser } from 'body-parser'
+import pino from 'pino-http'
+import { LOG_LEVEL } from '../config'
+
+export const logger = pino({ useLevel: LOG_LEVEL })
 
 export const cors: polka.Middleware = (req, res, next) => {
   // TODO:

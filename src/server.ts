@@ -1,6 +1,7 @@
 import app from '.'
+import { PORT } from './config'
 
-app.listen(3000, (err: ErrorConstructor) => {
+app.listen(PORT, (err: ErrorConstructor) => {
   if (err) throw err
-  console.log('> Running on localhost:3000')
+  console.log(`> Running on port ${PORT}`)
 })
