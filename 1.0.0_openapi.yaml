@@ -1,0 +1,90 @@
+---
+openapi: 3.0.0
+info:
+  title: Zalgo API
+  description: RESTful Api for captcha generation and validation
+  contact:
+    email: abertulla@gmail.com
+  license:
+    name: MIT
+    url: https://www.mit.edu/~amini/LICENSE.md
+  version: 1.0.0
+servers:
+- url: https://localhost:3000/v1
+  description: Local deployment
+tags:
+- name: captcha
+  description: provide interface to captcha generation and validation
+paths:
+  /captcha:
+    put:
+      tags:
+      - captcha
+      summary: grab a new Captcha
+      operationId: generateCaptcha
+      responses:
+        "201":
+          description: generate a new captcha images
+          headers:
+            Expire:
+              description: The UTC date/time at which the current captcha is persisted.
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CaptchaItem'
+  /captcha/{id}:
+    post:
+      tags:
+      - captcha
+      summary: submit a solution for a previous grabbed captcha
+      description: Post a solution for a captcha by ID
+      operationId: postCaptchaSolutionById
+      parameters:
+      - name: id
+        in: path
+        description: Captcha Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: nanoid
+      requestBody:
+        content:
+          solution:
+            schema:
+              type: string
+              format: string
+      responses:
+        "200":
+          description: Solution valid
+        "422":
+          description: solution not valid/too many attempts
+        "404":
+          description: no existing captcha was found
+components:
+  schemas:
+    CaptchaItem:
+      required:
+      - attemps
+      - base64
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+          format: nanoid
+          example: d290f1ee6c544b0190e6d
+        attemps:
+          type: number
+          example: 5
+        base64:
+          type: string
+          format: binary
