@@ -15,7 +15,7 @@
   "author": "Antonino Bertulla <abertulla@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^27.0.1",
+    "@types/jest": "^27.0.2",
     "@types/node": "^16.9.4",
     "@types/pino-http": "^5.7.0",
     "@types/polka": "^0.5.3",
