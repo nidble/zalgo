@@ -20,7 +20,7 @@
     "@types/pino-http": "^5.7.0",
     "@types/polka": "^0.5.3",
     "@types/supertest": "^2.0.11",
-    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.29.2",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -40,7 +40,7 @@
     "body-parser": "^1.19.0",
     "nanoid": "^3.1.25",
     "node-cache": "^5.1.2",
-    "pino-http": "^5.7.0",
+    "pino-http": "^5.8.0",
     "polka": "^0.5.2",
     "zalgo-captcha": "file:./pkg/zalgo-captcha"
   }
