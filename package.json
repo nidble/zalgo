@@ -16,7 +16,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^27.0.2",
-    "@types/node": "^16.10.3",
+    "@types/node": "^16.10.9",
     "@types/pino-http": "^5.8.0",
     "@types/polka": "^0.5.3",
     "@types/supertest": "^2.0.11",
