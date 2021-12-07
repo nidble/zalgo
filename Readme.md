@@ -75,7 +75,7 @@ npm install --production
 NODE_ENV=production node app
 ```
 
-## ENVriomental variables
+## Enviromental variables
 
 What follows is a table of principal variables and some examples
 
