@@ -10,7 +10,7 @@ const cache = new NodeCache({ stdTTL: DEFAULT_TTL })
 
 const decorate = (instance: Captcha) => ({
   isStale: () => 0 === instance.attempts,
-  decrAttemps: () => cache.set(`${CACHE_PREFIX}${instance.id}`, { ...instance, attempts: --instance.attempts }),
+  decrAttempts: () => cache.set(`${CACHE_PREFIX}${instance.id}`, { ...instance, attempts: --instance.attempts }),
   check: (solution: string) => instance.solution === solution,
   instance,
 })

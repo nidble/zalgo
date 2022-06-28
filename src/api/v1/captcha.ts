@@ -21,7 +21,7 @@ export const put: RequestHandler = (_req, res) => {
 }
 
 export const post: RequestHandler = (req, res) => {
-  const id = req.params.id
+  const id = req.params.id ?? ''
   if (!isValidId.test(id)) {
     return response(res, { type: 'Error', errors: [{ message: 'Uri resource not valid', field: 'id' }] }, 422)
   }
@@ -37,7 +37,7 @@ export const post: RequestHandler = (req, res) => {
   }
 
   if (!captcha.check(req.body.solution)) {
-    captcha.decrAttemps()
+    captcha.decrAttempts()
     return response(res, { type: 'Error', errors: [{ message: 'The solution is not valid', field: 'solution' }] }, 422)
   }
 
