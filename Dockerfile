@@ -4,7 +4,7 @@
 # Builder stage. #
 # ################
 # It will build: dev-dependencies, rust binary, Ts deps and Js
-FROM node:16-alpine AS builder
+FROM node:18-alpine AS builder
 
 WORKDIR /usr/src/app
 
@@ -44,7 +44,7 @@ RUN npm cit --quiet && npm run build
 # Production stage. #
 # ################# #
 # It will take Js and native files from "builder" stage, and also install the production packages only
-FROM node:16-alpine
+FROM node:18-alpine
 
 # Fix for Error: Error loading shared library ld-linux-x86-64.so.2: No such file or directory (needed by /app/pkg/zalgo-captcha/native/index.node)
 RUN apk add --no-cache libc6-compat dumb-init
