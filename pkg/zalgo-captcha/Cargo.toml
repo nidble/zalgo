@@ -11,7 +11,7 @@ exclude = ["index.node"]
 crate-type = ["cdylib"]
 
 [dependencies.neon]
-version = "0.8"
+version = "0.10"
 default-features = false
 features = ["napi-6"]
 
